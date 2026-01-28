@@ -33,8 +33,11 @@ class Book(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='bookshelf_profile')
-    role = models.CharField(max_length=20, choices=[('Admin', 'Admin'), ('Librarian', 'Librarian'), ('Member', 'Member')])
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(
+        max_length=20,
+        choices=[("admin", "Admin"), ("librarian", "Librarian"), ("member", "Member")]
+    )
 
     def __str__(self):
         return f"{self.user.username} - {self.role}"
