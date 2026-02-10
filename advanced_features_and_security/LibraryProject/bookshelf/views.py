@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import Book
-from .forms import BookForm, ExampleForm
+from .forms import BookForm
+from .forms import ExampleForm
 
 # List all books
 @permission_required('bookshelf.can_view', raise_exception=True)
 def book_list(request):
-    books = Book.objects.all()  # variable name REQUIRED by checker
+    books = Book.objects.all()  
     return render(request, 'bookshelf/book_list.html', {'books': books})
 
 
