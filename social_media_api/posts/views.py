@@ -1,19 +1,27 @@
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
-from rest_framework.response import Response
-from .models import Post
-from .serializers import PostSerializer
+from django.shortcuts import get_object_or_404
+from .models import CustomUser
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
-def feed_view(request):
-    following_users = request.user.following.all()
+def followuser(request, user_id):
+    users = CustomUser.objects.all()
+    user_to_follow = get_object_or_404(users, id=user_id)
 
-    posts = Post.objects.filter(
-        author__in=following_users
-    ).order_by('-created_at')
+    if request.user == user_to_follow:
+        return Response({"error": "You cannot follow yourself."}, status=400)
 
-    serializer = PostSerializer(posts, many=True)
-    return Response(serializer.data)
+    request.user.following.add(user_to_follow)
+    return Response({"message": "Followed successfully"})
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def unfollowuser(request, user_id):
+    users = CustomUser.objects.all()
+    user_to_unfollow = get_object_or_404(users, id=user_id)
+
+    request.user.following.remove(user_to_unfollow)
+    return Response({"message": "Unfollowed successfully"})
 
