@@ -14,7 +14,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-<<<<<<< HEAD
-
-=======
->>>>>>> afb93ecba8bc6ee8f5e3490d59b66bcbe1f64375

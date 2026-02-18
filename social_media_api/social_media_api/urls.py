@@ -2,11 +2,7 @@
 URL configuration for social_media_api project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-<<<<<<< HEAD
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
-=======
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
->>>>>>> afb93ecba8bc6ee8f5e3490d59b66bcbe1f64375
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -24,8 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('accounts.urls')),
+    path('api/', include('posts.urls')),
 ]
-<<<<<<< HEAD
-=======
-
->>>>>>> afb93ecba8bc6ee8f5e3490d59b66bcbe1f64375
